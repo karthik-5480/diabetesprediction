@@ -2,16 +2,16 @@ import streamlit as st
 import pickle
 pickle_in = open("classifier.pkl","rb")
 regressor=pickle.load(pickle_in)
-st.title("diabetes prediction")
+st.title("Diabetes prediction")
 
-a = float(st.number_input("Pregnencies"))
+a = float(st.number_input("Number of Pregnencies"))
 b = float(st.number_input("Glucose"))
 c = float(st.number_input("BloodPressure"))
-d = float(st.number_input("skinthickness"))
-e = float(st.number_input("insulin"))
-f = float(st.number_input("bmi"))
-g = float(st.number_input("diabetespedigreefunction"))
-h = float(st.number_input("age"))
+d = float(st.number_input("skin Thickness"))
+e = float(st.number_input("Insulin"))
+f = float(st.number_input("Body Mass Index"))
+g = float(st.number_input("Diabetes Pedigree Function"))
+h = float(st.number_input("Age"))
 
 
 btn = st.button("predict")
@@ -19,7 +19,11 @@ btn = st.button("predict")
 if btn:
     prediction=regressor.predict([[a,b,c,d,e,f,g,h]])
     st.subheader("Predicted diabetes:")
-    st.text(prediction[0])
+    if prediction[0]==1:
+        st.text("Yes there is a chance of Diabetes")
+    else:
+        st.text("There is a no chance of Diabetes")
+
 
 st.markdown(
     """
